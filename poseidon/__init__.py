@@ -30,7 +30,7 @@ def call(inp):
             out = 'syntax: add [key] ...'
         else:
             key = words[1]
-            rest = ''.join(words[2:])
+            rest = ' '.join(words[2:])
             if key in pos:
                 pos[key].add(rest)
                 out = 'added to ' + key
