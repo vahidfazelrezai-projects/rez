@@ -12,16 +12,15 @@ class List():
         self.contents.append(item)
 
     # remove first instance of item from contents
-    def remove(self, item):
-        self.contents.remove(item) # TODO PROBABLY INCORRECT SYNTAX
+    def remove(self, index):
+        self.contents.pop(index-1)
 
     # read contents according to given sort function
-    def read(self, sort_fn=lambda x: x):
-        sorted_list = sorted(self.contents, key=sort_fn) # TODO PROBABLY INCORRECT SYNTAX
+    def read(self):
         out = ''
-        for i in range(1, len(sorted_list)+1):
-            out += str(i) + ': ' + sorted_list[i-1] + '\n'
-        return out
+        for i in range(1, len(self.contents)+1):
+            out += str(i) + ': ' + self.contents[i-1] + '\n'            
+        return out[:-1]
 
 
 # call handler

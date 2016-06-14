@@ -7,6 +7,10 @@ if __name__ == '__main__':
     try:
         while True:
             inp = raw_input('> ')
-            print call(inp) + '\n'
+            out = call(inp)
+            if len(out) > 0:
+                if out[-1] != '\n':
+                    out += '\n'
+            print out
     except EOFError:
         print '\nbye'

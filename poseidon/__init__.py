@@ -31,8 +31,11 @@ def call(inp):
         else:
             key = words[1]
             rest = ''.join(words[2:])
-            pos[key].add(rest)
-            out = 'added to ' + key
+            if key in pos:
+                pos[key].add(rest)
+                out = 'added to ' + key
+            else:
+                out = key + ' does not exist'
 
     elif command == 'remove':
         # remove [key] [index]
@@ -42,8 +45,11 @@ def call(inp):
             key = words[1]
             try:
                 index = int(words[2])
-                pos[key].remove(index)
-                out = 'removed from ' + key
+                if key in pos:
+                    pos[key].remove(index)
+                    out = 'removed from ' + key
+                else:
+                    out = key + ' does not exist'
             except ValueError:
                 out = 'syntax: remove [key] [index] OR remove [index]'
 
@@ -53,7 +59,10 @@ def call(inp):
             out = 'syntax: show [key]'
         else:
             key = words[1]
-            out = pos[key].read()
+            if key in pos:
+                out = pos[key].read()
+            else:
+                out = key + ' does not exist'
 
     elif words[0] == 'new':
         # new [datatype] [key]
@@ -63,8 +72,8 @@ def call(inp):
             datatype = words[1]
             key = words[2]
             if datatype not in DATATYPES:
-                out = datatype + ' not supported. Supported datatypes:\n' + '\n'.join(DATATYPES)
-            elif key in pos.keys():
+                out = 'Datatype ' + datatype + ' not supported. Supported datatypes:\n' + '\n'.join(DATATYPES)
+            elif key in pos:
                 out = key + ' already exists'
             else:
                 pos[key] = ls.List() # TODO: hardcoding type here
